@@ -1,17 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://g25uqqj2ubc6"]
+[gd_scene load_steps=4 format=3 uid="uid://g25uqqj2ubc6"]
 
 [ext_resource type="Texture2D" uid="uid://7kfxf0gfc1iq" path="res://art/heroes/knight/weapon_sword_1.png" id="1_4nnh3"]
+[ext_resource type="Script" uid="uid://cpif66yt2q2px" path="res://scripts/hero_sword.gd" id="1_5ximj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5ximj"]
 radius = 2.8258924
 height = 14.129462
 
-[node name="Hero Sword" type="Area2D"]
+[node name="Hero Sword" type="Area2D" unique_id=417222596]
+script = ExtResource("1_5ximj")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=447723669]
+position = Vector2(9, 1)
 texture = ExtResource("1_4nnh3")
+offset = Vector2(5, -4)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1185477752]
 visible = false
 position = Vector2(0.9999999, -1)
 rotation = 0.8277365

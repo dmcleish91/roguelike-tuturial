@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://dnpfrs4f6gxk"]
+[gd_scene load_steps=22 format=3 uid="uid://dnpfrs4f6gxk"]
 
 [ext_resource type="Script" uid="uid://b2grqeye7kxgh" path="res://scripts/player.gd" id="1_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://cxc6adrruvevh" path="res://art/heroes/knight/knight_idle_spritesheet.png" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://dmlcojfy5p77p" path="res://art/heroes/knight/knight_run_spritesheet.png" id="3_qlg0r"]
 [ext_resource type="Script" uid="uid://giqpxy2bwyng" path="res://scripts/PlayerWalk.gd" id="4_dqkch"]
+[ext_resource type="PackedScene" uid="uid://g25uqqj2ubc6" path="res://scenes/hero_sword.tscn" id="4_fjrip"]
 [ext_resource type="Script" uid="uid://cwshfcn03l8ol" path="res://scripts/state_machine.gd" id="4_tuyoq"]
 [ext_resource type="Script" uid="uid://rsrdv04kv0ea" path="res://scripts/PlayerIdle.gd" id="5_fjrip"]
 
@@ -112,24 +113,26 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_4r5pv"]
 radius = 5.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=1527719204]
 script = ExtResource("1_qhqgy")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1601416651]
 sprite_frames = SubResource("SpriteFrames_fulsm")
-animation = &"run"
+animation = &"idle"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1895526715]
 visible = false
 shape = SubResource("CircleShape2D_4r5pv")
 
-[node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="HeroSword" parent="." unique_id=1681216720 instance=ExtResource("4_fjrip")]
+
+[node name="State Machine" type="Node" parent="." unique_id=1561210444 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_tuyoq")
 initial_state = NodePath("PlayerIdle")
 
-[node name="PlayerIdle" type="Node" parent="State Machine"]
+[node name="PlayerIdle" type="Node" parent="State Machine" unique_id=1881437492]
 script = ExtResource("5_fjrip")
 
-[node name="PlayerWalk" type="Node" parent="State Machine"]
+[node name="PlayerWalk" type="Node" parent="State Machine" unique_id=1083330455]
 script = ExtResource("4_dqkch")

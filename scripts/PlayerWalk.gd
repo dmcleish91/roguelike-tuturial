@@ -1,14 +1,14 @@
 extends State
 class_name PlayerWalk
 
-@export var move_speed: float = 100.0
+@export var move_speed: float = 40.0
 
 var player: CharacterBody2D
 
 func Enter():
 	player = owner as CharacterBody2D
-	if player and player.has_node("AnimatedSprite2D"):
-		player.get_node("AnimatedSprite2D").play("run")
+	if player:
+		player.play_run()
 
 func Exit():
 	pass
@@ -36,7 +36,9 @@ func Physics_Process(delta: float):
 	if input_vector.x != 0:
 		player.last_direction = input_vector.x
 	if player.has_node("AnimatedSprite2D"):
-		player.get_node("AnimatedSprite2D").flip_h = player.last_direction < 0
+		var flip_direction = player.last_direction < 0
+		player.get_node("AnimatedSprite2D").flip_h = flip_direction
+		player.flip_sword(flip_direction)
 
 	# If no input, transition to idle
 	if input_vector == Vector2.ZERO:

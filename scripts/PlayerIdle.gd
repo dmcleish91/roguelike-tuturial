@@ -5,10 +5,8 @@ var player: CharacterBody2D
 
 func Enter():
 	player = owner as CharacterBody2D
-	if player and player.has_node("AnimatedSprite2D"):
-		player.get_node("AnimatedSprite2D").play("idle")
-	if player:
-		player.velocity = Vector2.ZERO
+	player.play_idle()
+	player.velocity = Vector2.ZERO
 
 func Exit():
 	pass
