@@ -5,18 +5,18 @@ class_name PlayerWalk
 
 var player: CharacterBody2D
 
-func Enter():
+func Enter() -> void:
 	player = owner as CharacterBody2D
 	if player:
 		player.play_run()
 
-func Exit():
+func Exit() -> void:
 	pass
 
-func Update(_delta: float):
+func Update(_delta: float) -> void:
 	pass
 
-func Physics_Process(delta: float):
+func Physics_Process(delta: float) -> void:
 	if not player:
 		return
 
@@ -36,7 +36,7 @@ func Physics_Process(delta: float):
 	if input_vector.x != 0:
 		player.last_direction = input_vector.x
 	if player.has_node("AnimatedSprite2D"):
-		var flip_direction = player.last_direction < 0
+		var flip_direction: bool = player.last_direction < 0
 		player.get_node("AnimatedSprite2D").flip_h = flip_direction
 		player.flip_sword(flip_direction)
 
