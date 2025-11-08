@@ -3,22 +3,19 @@ class_name PlayerWalk
 
 @export var move_speed: float = 40.0
 
-var player: CharacterBody2D
+func enter() -> void:
+		owner.play_run()
 
-func Enter() -> void:
-	player = owner as CharacterBody2D
-	if player:
-		player.play_run()
-
-func Exit() -> void:
+func exit() -> void:
 	pass
 
-func Update(_delta: float) -> void:
+func update(_delta: float) -> void:
 	pass
 
-func Physics_Process(delta: float) -> void:
-	if not player:
-		return
+func physics_process(_delta: float) -> void:
+	# Check for attack input first (spacebar)
+	if Input.is_action_just_pressed("ui_accept"):
+		owner.attack()
 
 	var input_vector: Vector2 = Vector2.ZERO
 
@@ -34,11 +31,10 @@ func Physics_Process(delta: float) -> void:
 
 	# Update sprite direction
 	if input_vector.x != 0:
-		player.last_direction = input_vector.x
-	if player.has_node("AnimatedSprite2D"):
-		var flip_direction: bool = player.last_direction < 0
-		player.get_node("AnimatedSprite2D").flip_h = flip_direction
-		player.flip_sword(flip_direction)
+		owner.last_direction = input_vector.x
+		var flip_direction: bool = owner.last_direction < 0
+		owner.flip_hero(flip_direction)
+		owner.flip_sword(flip_direction)
 
 	# If no input, transition to idle
 	if input_vector == Vector2.ZERO:
@@ -46,5 +42,5 @@ func Physics_Process(delta: float) -> void:
 		return
 
 	# Move the player
-	player.velocity = input_vector.normalized() * move_speed
-	player.move_and_slide()
+	owner.velocity = input_vector.normalized() * move_speed
+	owner.move_and_slide()
